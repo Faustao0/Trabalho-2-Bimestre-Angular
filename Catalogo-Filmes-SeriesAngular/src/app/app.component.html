@@ -1,0 +1,41 @@
+<app-header></app-header>
+
+<div class="container">
+  <div class="search-bar">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Digite o nome do filme ou série..."
+      (keydown.enter)="searchMovies()"
+    />
+    <button (click)="searchMovies()">Buscar</button>
+  </div>
+
+  <div *ngIf="movies.length > 0 && !selectedMovie">
+    <h3>Resultados para "{{ searchTerm }}":</h3>
+
+    <div class="movie-list">
+      <div *ngFor="let movie of movies" class="movie-item" (click)="showMovieDetails(movie.imdbID)">
+        <h4>{{ movie.Title }} ({{ movie.Year }})</h4>
+        <img [src]="movie.Poster" alt="{{ movie.Title }} Poster" class="poster"/>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="selectedMovie" class="movie-details">
+    <h2>{{ selectedMovie.Title }} ({{ selectedMovie.Year }})</h2>
+    <img [src]="selectedMovie.Poster" alt="{{ selectedMovie.Title }} Poster" class="poster"/>
+    <ul>
+      <li><strong>Classificação:</strong> {{ selectedMovie.Rated }}</li>
+      <li><strong>Atores:</strong> {{ selectedMovie.Actors }}</li>
+      <li><strong>Tempo de Duração:</strong> {{ selectedMovie.Runtime }}</li>
+      <li><strong>Sinopse:</strong> {{ selectedMovie.Plot }}</li>
+      <li><strong>Prêmios:</strong> {{ selectedMovie.Awards }}</li>
+    </ul>
+    <button (click)="selectedMovie = null">Voltar aos resultados</button>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+</div>

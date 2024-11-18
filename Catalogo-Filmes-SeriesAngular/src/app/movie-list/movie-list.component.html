@@ -1,0 +1,6 @@
+<div *ngFor="let movie of movies">
+  <h3>{{ movie.Title }} ({{ movie.Year }})</h3>
+  <img [src]="movie.Poster" alt="{{ movie.Title }} Poster">
+  <button (click)="viewDetails(movie.imdbID)">Ver Detalhes</button>
+  <button (click)="toggleFavorite(movie)">Favorito</button>
+</div>
