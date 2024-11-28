@@ -30,6 +30,8 @@ export class SearchComponent {
       return;
     }
 
+    this.selectedMovie = null;
+
     const params = new HttpParams()
       .set('apikey', '50c4a3b4')
       .set('s', this.searchTerm);
