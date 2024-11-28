@@ -1,0 +1,22 @@
+<div class="favorites-container">
+  <h2>Meus Filmes e Séries Favoritos</h2>
+
+  <div *ngIf="favoriteMovies.length > 0 && !selectedMovie; else noFavorites">
+    <div class="movie-list">
+      <div
+        *ngFor="let movie of favoriteMovies"
+        class="movie-item"
+      >
+        <h4>{{ movie.Title }} ({{ movie.Year }})</h4>
+        <img [src]="movie.Poster" alt="{{ movie.Title }} Poster" class="poster" />
+        <button (click)="removeFavorite(movie.imdbID)">Remover dos Favoritos</button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noFavorites>
+    <p>Nenhum filme ou série favoritado.</p>
+  </ng-template>
+
+  <button (click)="goBack()" class="back-button" *ngIf="!selectedMovie">Voltar</button>
+</div>
